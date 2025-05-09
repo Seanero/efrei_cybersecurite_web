@@ -1,0 +1,2 @@
+Pour réaliser l'attaque, j'ai indiquer dans le champs "Email" (# Car je suis sous MariaDB) : ' OR 1=1; #
+Et la valeur de mot de passe est aléatoire car ce champ est défini comme commentaire dans l'injection.

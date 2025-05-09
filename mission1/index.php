@@ -58,7 +58,7 @@
     </style>
 </head>
 <body>
-    <form action="/" method="post">
+    <form action="/cybersecurite/mission1/" method="post">
         <h2 style="text-align:center;">Connexion</h2>
         <input type="text" name="email" placeholder="Email" required>
         <input type="password" name="password" placeholder="Mot de passe" required>
@@ -72,11 +72,16 @@
             if ($_POST["email"] && $_POST["password"]) {
                 $sql = "USE {$env["DATABASE"]}";
                 $conn->query($sql);
-                $sql = "SELECT * FROM user WHERE email='{$_POST["email"]}' AND password='{$_POST["password"]}'";
-                $result = $conn->query($sql);
+
+                $stmt = $conn->prepare("SELECT * FROM user WHERE email=? AND password=?");
+                $stmt->bind_param("ss", $_POST["email"], $_POST["password"]);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $stmt-> close();
+
 
                 if ($result->num_rows > 0) {
-                    header('Location: dashboard.php');
+                    header('Location: /cybersecurite/mission1/dashboard.php');
                     exit();
                 } else {
                     echo "<div class='error'>Email ou mot de passe incorrect</div>";
