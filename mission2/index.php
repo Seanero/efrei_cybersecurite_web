@@ -88,7 +88,7 @@
     $conn = new mysqli($env["SERVERNAME"], $env["USERNAME"], $env["PASSWORD"]);
     ?>
 
-    <form action="/" method="post">
+    <form action="/cybersecurite/mission2/" method="post">
         <input type="text" name="comment" placeholder="Ajouter un post..." required>
         <button type="submit">Ajouter</button>
     </form>
@@ -100,7 +100,7 @@
 
         if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $sql = "INSERT INTO comment (content) VALUES ('{$_POST["comment"]}')";
-            $conn->query($sql);
+            $result = $conn->query($sql);
         }
 
         $sql = "SELECT * FROM comment ORDER BY id DESC"; // plus récent d'abord
@@ -109,8 +109,8 @@
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo "<div class='comment'>";
-                echo "<div class='id'>#{$row["id"]}</div>";
-                echo "<div class='content'>" . $row["content"] . "</div>";
+                echo "<div class='id'>#" . htmlspecialchars($row["id"]) . "</div>";
+                echo "<div class='content'>" . htmlspecialchars($row["content"]) . "</div>";
                 echo "</div>";
             }
         } else {

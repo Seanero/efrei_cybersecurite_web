@@ -1,0 +1,3 @@
+Pour réaliser l'attaque, j'ai indiquer dans le champs "Ajouter un post" : <a href="https://google.com">Google.com</a>
+
+Cette attaque a pour but d'injecter du code HTML dans une page.
